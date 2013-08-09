@@ -14,9 +14,13 @@ sudo apt-get install -y xbmc sysstat iotop ssh gparted curl
 #also create a WAN advanced settings
 cp advancedsettings.xml ~/home/tolly/.xbmc/userdata/
 
+#Adding Aliases
+alias lss="ls -hal"
 
 #droidmote installation
-
+mkdir /home/tolly/Documents/droidmote
+cp -R /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/ /home/tolly/Documents/droidmote/
+cd /home/tolly/Documents/droidmote/
 sudo chmod 777 droidmote
 sudo echo -e "./home/tolly/Documents/droidmote/droidmote 2302 password &" >> /etc/rc.local
 
