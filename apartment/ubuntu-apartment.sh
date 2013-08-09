@@ -3,7 +3,7 @@ sudo apt-get install -y cifs-utils
 
 
 #Mounting of the Drobo
-sudo echo -e "//192.168.2.45/Media /home/tolly/Drobo	cifs	username=Admin,password=Pass@word1,uid=tolly,gid=tusers,dir_mode=0774,file_mode=0774	0	0" >> /etc/fstab
+sudo echo -e "//192.168.2.45/Media /home/tolly/Drobo	cifs	username=Admin,password=Pass@word1,uid=tolly,gid=tolly,dir_mode=0774,file_mode=0774	0	0" >> /etc/fstab
 sudo echo -e "#Above is the primary mount for Drobo and the default credentials    ">> /etc/fstab
 mkdir /home/tolly/Drobo
 sudo mount -a
@@ -26,6 +26,7 @@ alias lss="ls -hal"
 mkdir /home/tolly/Documents/droidmote
 cp -R /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/ /home/tolly/Documents/droidmote/
 cd /home/tolly/Documents/droidmote/
+chown -R tolly /home/tolly/Documents/droidmote/
 sudo chmod 777 droidmote
 sudo echo -e "./home/tolly/Documents/droidmote/droidmote 2302 password &" >> /etc/rc.local
 
