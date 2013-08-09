@@ -17,7 +17,7 @@ sudo apt-get install -y xbmc sysstat iotop ssh gparted curl
 #Adding xbmc config
 #modify eventually so the user can enter the username, or take it from somewhere else
 #also create a WAN advanced settings
-cp advancedsettings.xml ~/home/tolly/.xbmc/userdata/
+cp advancedsettings.xml /home/tolly/.xbmc/userdata/
 
 #Adding Aliases
 alias lss="ls -hal"
