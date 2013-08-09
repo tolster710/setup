@@ -24,7 +24,7 @@ alias lss="ls -hal"
 
 #droidmote installation
 mkdir /home/tolly/Documents/droidmote
-cp -R /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/ /home/tolly/Documents/droidmote/
+cp  /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/* /home/tolly/Documents/droidmote/
 cd /home/tolly/Documents/droidmote/
 chown -R tolly /home/tolly/Documents/droidmote/
 sudo chmod 777 droidmote
