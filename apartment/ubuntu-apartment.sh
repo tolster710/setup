@@ -27,7 +27,7 @@ sudo apt-get update
 #sudo apt-get upgrade -y
 
 
-sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions;
+sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2;
 
 
 #Adding xbmc config
