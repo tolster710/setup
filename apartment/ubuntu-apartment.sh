@@ -49,7 +49,7 @@ done
 
 #Adding Aliases
 alias lss="ls -hal"
-
+alias bk="cd .."
 # Installing webmin on sever
 
 while true; do
