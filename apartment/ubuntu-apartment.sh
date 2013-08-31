@@ -27,7 +27,7 @@ sudo apt-get update
 #sudo apt-get upgrade -y
 
 
-sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2;
+sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon iostat;
 
 
 #Adding xbmc config
@@ -53,7 +53,7 @@ alias bk="cd .."
 # Installing webmin on sever
 
 while true; do
-	read -p "Do you wish to install Webmin? (yes for tolly DC)" yn
+	read -p "Do you wish to install Webmin? " yn
 	case $yn in
 	[Yy]* ) 
 
@@ -78,12 +78,12 @@ while true; do
 	case $yn in
 	[Yy]* ) 
 
-mkdir /home/tolly/Documents/droidmote;
-cp  /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/* /home/tolly/Documents/droidmote/;
-cd /home/tolly/Documents/droidmote/;
-chown -R tolly /home/tolly/Documents/droidmote/;
+mkdir /home/tolly/Documents/utilities/droidmote;
+cp  /home/tolly/Drobo/Data/Apartment_data/linux\ 64bit/* /home/tolly/Documents/utilities/droidmote/;
+cd /home/tolly/Documents/utilities/droidmote/;
+chown -R tolly /home/tolly/Documents/utilities/droidmote/;
 sudo chmod 777 droidmote;
-sudo echo -e "./home/tolly/Documents/droidmote/droidmote 2302 password &" >> /etc/rc.local;
+sudo echo -e "./home/tolly/Documents/utilities/droidmote/droidmote 2302 password &" >> /etc/rc.local;
 break;;
 
 [Nn]* ) break;;
