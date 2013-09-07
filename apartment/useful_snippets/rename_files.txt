@@ -1,0 +1,12 @@
+#useful scripts for apartment functions:
+
+#This one takes all files in a directory where matches " - " and stripsout the fifth bracket,
+#moving the file or folder to a shorter version
+
+#caution - - - - USE IFS= ' \n ' for it to work properly
+
+for f in `find . -name "* - *"`; do t=`echo $f | awk '/ - / {print $5}'`; mv $f $t && echo "moved $f -> $t"; done
+
+
+09-06-13
+___________________________________________________________
