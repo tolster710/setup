@@ -1,5 +1,14 @@
+
+#Updated 12Sept13
+#Git script to cleanup trenort directory
+#To do - end--> run move script to put folders to directory under TV shows --> log it and deliver to email
+#To do remove more file junk
+#To do --> transcode
+
 IFS='
 '
+
+
 for f in `find . -name "*] - *"`;
 do t=`echo $f | awk '/ - / {print $5}'`; 
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/rename.log;
