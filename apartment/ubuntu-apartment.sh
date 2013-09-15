@@ -27,7 +27,7 @@ sudo apt-get update
 #sudo apt-get upgrade -y
 
 
-sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon iostat;
+sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon sysstat;
 
 
 #Adding xbmc config
@@ -93,4 +93,7 @@ done
 
 echo "Droidmote installed and added to startup"
 echo "Done! - quitting"
+
+
+# teamviewer 64 bit deb url : http://download.teamviewer.com/download/teamviewer_linux_x64.deb
 
