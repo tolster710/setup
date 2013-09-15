@@ -92,8 +92,25 @@ break;;
 done
 
 echo "Droidmote installed and added to startup"
+
+
+while true; do
+	read -p "Do you want to Install teamviewer?  :  " yn
+	case $yn in
+	[Yy]* ) 
+	#while true; do
+		#read -p "32 bit or 64 bit?  "
+	wget  http://download.teamviewer.com/download/teamviewer_linux_x64.deb
+	dpkg -i teamviewer_linux_x64.deb
+	rm teamviewer_linux_x64.deb
+
+[Nn]* ) break;;
+	* ) echo "Please answer yes or no/";;
+	esac
+done
+
 echo "Done! - quitting"
 
-
 # teamviewer 64 bit deb url : http://download.teamviewer.com/download/teamviewer_linux_x64.deb
+# 32 bit url http://download.teamviewer.com/download/teamviewer_linux.deb
 
