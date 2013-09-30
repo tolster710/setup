@@ -14,11 +14,16 @@ do t=`echo $f | awk '/ - / {print $5}'`;
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/rename.log;
 done
 
-for f in `find . -name "*HDTV*"`;
+for f in `find . -name "*[Hh][Dd][Tt][Vv]*" -o -name "*mp4" -o -name "*avi" -o -name "*mkv"`;
 do t=`echo $f | 
 sed 's/HDTV.//g' | 
 sed 's/x264//g' |
  sed 's/720p//g' | 
+sed 's/1080p//g' |
+sed 's/BluRay//g' |
+sed 's/YIFY//g' |
+sed 's/ftp//g' |
+sed 's/WEBDL//g' |
 sed 's/EVOLVE//g' | 
 sed 's/ASAP//g' | 
 sed 's/IMMERSE//g' |
@@ -30,11 +35,13 @@ sed 's/AAC//g' |
 sed 's/MVGroup//g' | 
 sed 's/\[VTV\]//g' |
 sed 's/\[ettv\]//g' |
-sed 's/XviAFG//g' |
+sed 's/XviDAFG//g' |
  sed 's/DHD//g' |  
+sed 's/killers//g' |
 sed 's/480p//g' | 
 sed 's/hdtv//g' |
 sed 's/2hd//g' |
+sed 's/xvidfqm//g' |
 sed 's/x264//g' |
 sed 's/\-//g'  |
 sed 's/\.\./\./g' |
@@ -58,11 +65,14 @@ find . -name "*.txt" -exec rm {} \;
 find . -name "*.nfo" -exec rm {} \;
 find . -name "*.sfv" -exec rm {} \;
 find . -name "*.jpg" -exec rm {} \;
-find . -name "*.mkv" -exec mv {} .\;
-find . -name "*.mp4" -exec mv {} .\;
-find . -name "*.avi" -exec mv {} .\;
-find . -name "*.m4v" -exec mv {} .\;
-find . -name "*sample.*" -exec rm {} \;
+find . -name "*.jpeg" -exec rm {} \;
+find . -name "*.png" -exec rm {} \;
+find . -name "*.srt" -exec rm {} \;
+find . -name "*.mkv" -exec mv {} . \;
+find . -name "*.mp4" -exec mv {} . \;
+find . -name "*.avi" -exec mv {} . \;
+find . -name "*.m4v" -exec mv {} . \;
+find . -name "*[Ss]ample*" -exec rm {} \;
 find . -name "Sample/*" -exec rm {} \;
 find . -name "sample-*" -exec rm {} \;
 find . -type d -name "Sample" -exec rmdir {} \;
