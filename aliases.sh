@@ -2,6 +2,11 @@
 #JT alias scripts, - part of dev deployment for all jt machines
 # 10/14/13 - initial version, sourced from web
 
+#Git stuff
+alias gits='git status'
+alias gita='git add *'
+alias gitpom='git push origin master'
+alias gitc='git commit -m'
 
 
 
