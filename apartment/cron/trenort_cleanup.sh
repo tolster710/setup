@@ -58,7 +58,6 @@ done
 #trying to unify script
 for f in `find . -name "*] - *"`;
 do t=`echo $f | awk '/ - / {print $5}'`; 
-cat $t | wc;
 for u in $t; 
 do s=`echo $u | 
 sed 's/[Hh][Dd][tT][Vv].//g' | 
@@ -96,7 +95,6 @@ sed 's/\.\./\./g' |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g'
 `;
-cat $s | wc;
 echo $s; done
 done
 

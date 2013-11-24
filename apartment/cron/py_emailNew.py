@@ -1,8 +1,16 @@
 import smtplib
+import sys
 from datetime import datetime
  
  
-def noticeEMail(starttime, usr, psw, fromaddr, toaddr):
+def read_changed(filename):
+ 	with open (filename,"r") as logfile:
+ 		data=logfile.readlines()
+ 	return data
+  
+ 
+ 
+def noticeEMail(starttime, usr, psw, fromaddr, toaddr, files):
     """
     Sends an email message through GMail once the script is completed.  
     Developed to be used with AWS so that instances can be terminated 
@@ -19,7 +27,7 @@ def noticeEMail(starttime, usr, psw, fromaddr, toaddr):
     toaddr : a email address, or a list of addresses, to send the 
              message to
     """
- 
+    print "email notice launched" 
     # Calculate run time
     runtime=datetime.now() - starttime
     
@@ -30,30 +38,39 @@ def noticeEMail(starttime, usr, psw, fromaddr, toaddr):
     
     # Send email
     senddate=datetime.strftime(datetime.now(), '%Y-%m-%d')
-    subject="Your job has completed"
+    subject="New Files added from Trenort today"
     m="Date: %s\r\nFrom: %s\r\nTo: %s\r\nSubject: %s\r\nX-Mailer: My-Mail\r\n\r\n" % (senddate, fromaddr, toaddr, subject)
     msg='''
     
-    Job runtime: '''+str(runtime)
+    New Files: '''+str(files)
     
     server.sendmail(fromaddr, toaddr, m+msg)
+    print "message sent"
     server.quit()
  
  
+ 
+
+ 
 if __name__ == '__main__':
     # Start time of script
+    print 'Number of arguments:', len(sys.argv), 'arguments.'
+    print 'Argument List:', str(sys.argv)    
     starttime=datetime.now()
- 
+    usr=sys.argv[1]
+    psw=sys.argv[2]
+    filename=sys.argv[3]
+    files=read_changed(filename)
     # Some long job...we'll count to 100,000,000
     count=0
     for i in xrange(100000000):
         count+=1
         
     # Fill these in with the appropriate info...
-    urs=''
-    psw=''
-    fromaddr=''
-    toaddr=''
+    #urs='johnftolly@gmail.com'
+    #psw=''
+    fromaddr=usr
+    toaddr=usr
  
     # Send notification email
-    noticeEMail(starttime, usr, psw, fromaddr, toaddr)
+    noticeEMail(starttime, usr, psw, fromaddr, toaddr, files)
