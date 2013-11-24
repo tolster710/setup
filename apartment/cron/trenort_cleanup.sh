@@ -10,8 +10,8 @@ IFS='
 
 #do below loop to strip out the [] from the names and the first part
 
-for f in `find . -name "*] - *"`;
-do t=`echo $f | awk '/ - / {print $5}'`; 
+for f in `find . -name "* - *"`;
+do t=`echo $f | awk '/ - / {print $NF}'`; 
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/rename.log;
 done
 
@@ -55,9 +55,9 @@ done
 
 
 
-#trying to unify script
+#trying to unify script - will only work for items with the brackets in the name
 for f in `find . -name "*] - *"`;
-do t=`echo $f | awk '/ - / {print $5}'`; 
+do t=`echo $f | awk '/ - / {print $NF}'`; 
 for u in $t; 
 do s=`echo $u | 
 sed 's/[Hh][Dd][tT][Vv].//g' | 
@@ -128,6 +128,42 @@ find . -type d -exec rmdir {} \;
 
 
 
+#Spits out what season is associated with the episode / info - includes all permutations on 
+for f in `find . -name "*[Ss][0-9]*"`; 
+do
+echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'; 
+done
 
 
 
+#scripting - gets file and puts it under season heading
+#NEXT - Add outer loop for each directory in TV Shows
+rootDir=$(pwd)
+for f in `find . -name "*[Ss][0-9]*"`; 
+do
+dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
+movedir=$rootDir/$dir;
+mkdir $movedir;
+mv $f $movedir/;
+done
+
+
+#NEXT - Add outer loop for each directory in TV Shows - doesnt work right now
+IFS='
+'
+rootDir=$(pwd);
+for i in `find $rootDir -type d -maxdepth 1`;
+	do
+	TVDir=$i/;
+	for f in `find $TVDir -name "*[Ss][0-9]*"`; 
+		do
+		dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
+		movedir=$TVDir/$dir;
+		if [ -d $movedir ]; then
+			sleep 1;
+		else
+			mkdir $movedir;
+		fi
+		mv $f $movedir/;
+	done
+done
