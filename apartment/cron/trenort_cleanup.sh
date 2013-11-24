@@ -8,6 +8,7 @@
 IFS='
 '
 
+#do below loop to strip out the [] from the names and the first part
 
 for f in `find . -name "*] - *"`;
 do t=`echo $f | awk '/ - / {print $5}'`; 
@@ -51,6 +52,55 @@ sed 's/\.\./\./g'
 
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
 done
+
+
+
+#trying to unify script
+for f in `find . -name "*] - *"`;
+do t=`echo $f | awk '/ - / {print $5}'`; 
+cat $t | wc;
+for u in $t; 
+do s=`echo $u | 
+sed 's/[Hh][Dd][tT][Vv].//g' | 
+sed 's/[x]264//g' |
+ sed 's/720p//g' | 
+sed 's/1080p//g' |
+sed 's/BluRay//g' |
+sed 's/YIFY//g' |
+sed 's/ftp//g' |
+sed 's/WEBDL//g' |
+sed 's/EVOLVE//g' | 
+sed 's/ASAP//g' | 
+sed 's/IMMERSE//g' |
+ sed 's/LOL//g' | 
+sed 's/KILLERS//g' |
+ sed 's/REPACK//g' |
+ sed 's/DIMENSION//g' | 
+  sed 's/WEBDL//g' | 
+  sed 's/BAJSKORV//g' |
+sed 's/A[FA][GC]//g' | 
+sed 's/MVGroup//g' | 
+sed 's/\[VTV\]//g' |
+sed 's/\[ettv\]//g' |
+sed 's/[xX]viDAFG//g' |
+ sed 's/DHD//g' |  
+ sed 's/[Ff][oO][vV]//g' |
+sed 's/killers//g' |
+sed 's/480p//g' | 
+sed 's/[Xx][Vv][Ii][dD]//g' |
+sed 's/[m2][hsH][Dd]//g' |
+sed 's/xvidfqm//g' |
+sed 's/[Xx]264//g' |
+sed 's/\-//g'  |
+sed 's/\.\./\./g' |
+sed 's/\.\./\./g' |
+sed 's/\.\./\./g'
+`;
+cat $s | wc;
+echo $s; done
+done
+
+
 
 
 
