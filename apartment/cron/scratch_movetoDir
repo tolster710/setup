@@ -1,0 +1,42 @@
+find /home/tolly/Drobo/Trenort/trenort/ -name "Parks*" -exec /bin/mv  '{}'  -R /home/tolly/Drobo/TV\ Shows/Parks\ and\ Recreation/Season\ 5/ \;
+find /home/tolly/Drobo/Trenort/trenort/ -name "Parks*" -exec /bin/mv  '{}'   /home/tolly/Drobo/TV\ Shows/Parks\ and\ Recreation/Season\ 5/ \;
+
+
+
+#Trying to define function where I define an identifier regex that both source and dest will have, then I move the files there
+#won't list directory from TV SHows dir
+testnames=('Parks' 'Peele' 'Interest')
+rootDir=$(pwd)
+MovieDir=/home/tolly/Drobo/TV\ Shows
+for ((i=0; i<${#testnames[@]};i++));
+do
+	for f in `find $rootDir -name "*${testnames[i]}*"`;
+	do
+		echo $f;
+		#dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
+		for g in `find $MovieDir -type d -name "*${testnames[i]}*"`;
+		do
+			#move_dir=$g/$dir
+			#echo $move_dir;
+			echo $g
+		done
+	done
+done
+
+
+
+
+
+## iterates thjrough values in array
+for ((i=0; i<${#testvar[@]};i++)); do echo ${testvar[$i]}; done
+
+#Not working right now, appeared to let grep continue successfully
+for f in `find $rootDir -exec cat {} | grep ${testnames[i]}\;`;
+
+
+
+#Spits out what season is associated with the episode / info - includes all permutations on 
+for f in `find . -name "*[Ss][0-9]*"`; 
+do
+echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'; 
+done
