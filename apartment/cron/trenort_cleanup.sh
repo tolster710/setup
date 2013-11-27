@@ -1,10 +1,12 @@
 
-#Updated 12Sept13
+#Updated 26Nov13
 #Git script to cleanup trenort directory
 #To do - end--> run move script to put folders to directory under TV shows --> log it and deliver to email
 #To do remove more file junk
 #To do --> transcode
-
+trenort=/home/tolly/Drobo/Trenort/trenort
+AGIT_DIR=$(pwd);
+cd $trenort
 IFS='
 '
 
@@ -35,13 +37,13 @@ find . -name "sample-*" -exec rm {} \;
 find . -type d -name "Sample" -exec rmdir {} \;
 find . -type d -exec rmdir {} \;
 
-
+#Finds and removes all show names that begin with []
 for f in `find . -name "* - *"`;
 do t=`echo $f | awk '/ - / {print $NF}'`; 
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/rename.log;
 done
 
-
+#strips suffix of filename
 rootDir=$(pwd);
 for f in `find $rootDir -name "*[Hh][Dd][Tt][Vv]*" -o -name "*mp4" -o -name "*avi" -o -name "*mkv"`;
 do t=`echo $f | 
@@ -65,6 +67,8 @@ sed 's/KILLERS//g' |
   sed 's/[bB][Aa][jJ][sS][kK][oO][rR][vV]//g' |
 sed 's/A[FA][GC]//g' | 
 sed 's/MVGroup//g' | 
+sed 's/[Dd][oO][Ll][eE][Mm][iI][tT][eE]//g' |
+sed 's/[Cc][rR][iI][mM][Ss][oO][nN]//g' |
 sed 's/\[VTV\]//g' |
 sed 's/\[ettv\]//g' |
 sed 's/[xX]viDAFG//g' |
@@ -82,54 +86,46 @@ sed 's/\.\./\./g' |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g'
 `;
-
 mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
 done
 
 
+#Moves the files to the proper directory under TVShows
 
-
-
-
-
-
-
-#Spits out what season is associated with the episode / info - includes all permutations on 
-for f in `find . -name "*[Ss][0-9]*"`; 
-do
-echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'; 
-done
-
-
-
-#scripting - gets file and puts it under season heading
-#NEXT - Add outer loop for each directory in TV Shows
+#Producton 11/26
+testnames=('Parks' 'Peele' 'Interest' 'Newsroom' 'American' 'Family' 'Community' 'Broke' 'Portlandia' 'Archer' 'QI' 'Planet' 'Californ' 'Suits' 'Psych' 'Mother' 'Comic' 'Horizon' ' Tosh' 'Storage' 'Walking')
 rootDir=$(pwd)
-for f in `find . -name "*[Ss][0-9]*"`; 
-do
-dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
-movedir=$rootDir/$dir;
-mkdir $movedir;
-mv $f $movedir/;
+MovieDir=/home/tolly/Drobo/TV\ Shows
+for ((i=0; i<${#testnames[@]};i++)); 
+do  
+for f in `find $rootDir -name "*${testnames[$i]}*"`;
+do 
+#echo "$i, $f";
+base_dir=$(find $MovieDir -maxdepth 1 -type d -name "*${testnames[$i]}*");
+if [ "$base_dir" = "" ]; then
+echo "Cannot find destination for $f"
+else
+season=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}');
+move_dir=$base_dir/$season;
+if [ -d $move_dir ]; 
+then
+echo "Dir exists"
+else
+mkdir $move_dir;
+fi
+mv $f $move_dir/ && echo "Moved $f --> $movedir" >> /tmp/Trenort_moved.txt
+fi
+done; 
 done
 
 
-#NEXT - Add outer loop for each directory in TV Shows - doesnt work right now
-IFS='
-'
-rootDir=$(pwd);
-for i in `find $rootDir -type d -maxdepth 1`;
-	do
-	TVDir=$i/;
-	for f in `find $TVDir -name "*[Ss][0-9]*"`; 
-		do
-		dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
-		movedir=$TVDir/$dir;
-		if [ -d $movedir ]; then
-			sleep 1;
-		else
-			mkdir $movedir;
-		fi
-		mv $f $movedir/;
-	done
-done
+#launches the python script from its location under /home/tolly/Documents/apt_scripts
+
+python /home/tolly/Documents/apt_scripts 'johnftolly@gmail.com' 'AASDFASDF' '/home/tolly/Documents/apt_scripts'
+
+
+
+
+
+
+

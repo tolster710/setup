@@ -4,24 +4,33 @@ find /home/tolly/Drobo/Trenort/trenort/ -name "Parks*" -exec /bin/mv  '{}'   /ho
 
 
 #Trying to define function where I define an identifier regex that both source and dest will have, then I move the files there
-#won't list directory from TV SHows dir
-testnames=('Parks' 'Peele' 'Interest')
+#Producton 11/26
+testnames=('Parks' 'Peele' 'Interest' 'Newsroom' 'American' 'Family' 'Community' 'Broke' 'Portlandia' 'Archer' 'QI' 'Planet' 'Californ' 'Suits' 'Psych' 'Mother' 'Comic' 'Horizon' ' Tosh' 'Storage' 'Walking')
 rootDir=$(pwd)
 MovieDir=/home/tolly/Drobo/TV\ Shows
-for ((i=0; i<${#testnames[@]};i++));
-do
-	for f in `find $rootDir -name "*${testnames[i]}*"`;
-	do
-		echo $f;
-		#dir=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'); 
-		for g in `find $MovieDir -type d -name "*${testnames[i]}*"`;
-		do
-			#move_dir=$g/$dir
-			#echo $move_dir;
-			echo $g
-		done
-	done
+for ((i=0; i<${#testnames[@]};i++)); 
+do  
+for f in `find $rootDir -name "*${testnames[$i]}*"`;
+do 
+#echo "$i, $f";
+base_dir=$(find $MovieDir -maxdepth 1 -type d -name "*${testnames[$i]}*");
+if [ "$base_dir" = "" ]; then
+echo "Cannot find destination for $f"
+else
+season=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}');
+move_dir=$base_dir/$season;
+if [ -d $move_dir ]; 
+then
+echo "Dir exists"
+else
+mkdir $move_dir;
+fi
+#echo $move_dir;
+mv $f $move_dir/ && echo "Moved $f --> $movedir" >> /tmp/Trenort_moved.txt
+fi
+done; 
 done
+
 
 
 
@@ -40,3 +49,28 @@ for f in `find . -name "*[Ss][0-9]*"`;
 do
 echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}'; 
 done
+
+
+
+#works - prototype
+for ((i=0; i<${#testnames[@]};i++)); 
+do  
+for f in `find $rootDir -name "*${testnames[$i]}*"`;
+do 
+echo "$i, $f";
+base_dir=$(find $MovieDir -maxdepth 1 -type d -name "*${testnames[$i]}*");
+season=$(echo $f | sed 's/[-_.]/ /g' | grep -oh "\w*[sS][0-9]\w*" | sed 's/[eE]/ /g' | sed 's/[sS]/Season/g' | sed 's/0//g' | awk '{print $1}');
+move_dir=$base_dir/$season;
+if [ -d $move_dir ]; 
+then
+echo "Dir exists"
+else
+mkdir $move_dir;
+fi
+echo $move_dir;
+done; 
+done
+
+
+
+		
