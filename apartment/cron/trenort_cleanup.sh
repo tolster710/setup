@@ -27,10 +27,13 @@ find . -name "*.jpg" -exec rm {} \;
 find . -name "*.jpeg" -exec rm {} \;
 find . -name "*.png" -exec rm {} \;
 find . -name "*.srt" -exec rm {} \;
+find . -name "*.sub" -exec rm {} \;
+find . -name "*.idx" -exec rm {} \;
 find . -name "*.mkv" -exec mv {} . \;
 find . -name "*.mp4" -exec mv {} . \;
 find . -name "*.avi" -exec mv {} . \;
 find . -name "*.m4v" -exec mv {} . \;
+find . -name "*.mov" -exec mv {} . \;
 find . -name "*[Ss]ample*" -exec rm {} \;
 find . -name "Sample/*" -exec rm {} \;
 find . -name "sample-*" -exec rm {} \;
@@ -44,8 +47,8 @@ mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/rename.log;
 done
 
 #strips suffix of filename
-rootDir=$(pwd);
-for f in `find $rootDir -name "*[Hh][Dd][Tt][Vv]*" -o -name "*mp4" -o -name "*avi" -o -name "*mkv"`;
+#rootDir=$(pwd);
+for f in `find $rootDir -maxdepth 1 -name "*.*"`;
 do t=`echo $f | 
 sed 's/[Hh][Dd][tT][Vv].//g' | 
 sed 's/[hHxX]264//g' |
@@ -80,20 +83,19 @@ sed 's/[Xx][Vv][Ii][dD]//g' |
 sed 's/[m2][hsH][Dd]//g' |
 sed 's/xvidfqm//g' |
 sed 's/264//g' |
-sed 's/[0-9].[0-9]//g'
 sed 's/\-//g'  |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g'
 `;
-mv $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
+mv -n $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
 done
 
 
 #Moves the files to the proper directory under TVShows
 
 #Producton 11/26
-testnames=('Parks' 'Peele' 'Interest' 'Newsroom' 'American' 'Family' 'Community' 'Broke' 'Portlandia' 'Archer' 'QI' 'Planet' 'Californ' 'Suits' 'Psych' 'Mother' 'Comic' 'Horizon' ' Tosh' 'Storage' 'Walking')
+testnames=('[Pp]arks' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
 rootDir=$(pwd)
 MovieDir=/home/tolly/Drobo/TV\ Shows
 for ((i=0; i<${#testnames[@]};i++)); 
@@ -113,7 +115,7 @@ echo "Dir exists"
 else
 mkdir $move_dir;
 fi
-mv $f $move_dir/ && echo "Moved $f --> $movedir" >> /tmp/Trenort_moved.txt
+mv $f $move_dir/ && echo "Moved $f --> $move_dir" >> /tmp/Trenort_moved.txt
 fi
 done; 
 done
@@ -121,9 +123,10 @@ done
 
 #launches the python script from its location under /home/tolly/Documents/apt_scripts
 
-python /home/tolly/Documents/apt_scripts 'johnftolly@gmail.com' 'AASDFASDF' '/home/tolly/Documents/apt_scripts'
+python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'AASDFASDF' '/home/tolly/Documents/apt_scripts'
 
-
+rm /tmp/Trenort_moved.txt;
+#remove the temporary file
 
 
 
