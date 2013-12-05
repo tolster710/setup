@@ -1,5 +1,17 @@
-sudo apt-get update
-sudo apt-get install -y cifs-utils
+
+
+	#Prompt to install core packages and dependencies - such as python, screen, ssh, sysstat - and other userful utilities
+	while true; do
+		read -p "Install python, make, screen, and ssh? (Typically yes in any environment)" yn
+		case $yn in
+		[Yy]* ) 
+			sudo apt-get update;
+			sudo apt-get install -y git-core sshfs openssl screen python-software-properties python g++ make apt-show-versions cifs-utils;
+			break;;
+		[Nn]* ) break;;
+		* ) echo "Please answer yes or no/";;
+		esac
+	done
 
 
 #Mounting of the Drobo
@@ -10,10 +22,10 @@ while true; do
 	[Yy]* ) 
 
 	sudo echo -e "//192.168.2.45/Media /home/tolly/Drobo	cifs	username=Admin,password=Pass@word1,uid=tolly,gid=tolly,dir_mode=0774,file_mode=0774	0	0" >> /etc/fstab;
-sudo echo -e "#Above is the primary mount for Drobo and the default credentials    ">> /etc/fstab;
-mkdir /home/tolly/Drobo;
-sudo mount -a;
-break;;
+	sudo echo -e "#Above is the primary mount for Drobo and the default credentials    ">> /etc/fstab;
+	mkdir /home/tolly/Drobo;
+	sudo mount -a;
+	break;;
 [Nn]* ) break;;
 	* ) echo "Please answer yes or no/";;
 	esac
@@ -22,12 +34,48 @@ done
 echo "---------------------------------"
 
 
-#Installing software
-sudo apt-get update
-#sudo apt-get upgrade -y
 
+	echo "-------------------------------------"
+	echo "Done...."
+	echo "---------------------------------------------"	
+	echo "--------------------------------------"
+	#Prompt to install updates using apt-get update
+	while true; do
+		read -p "Install all updates?" yn
+		case $yn in
+		[Yy]* ) 
+			sudo apt-get update;
+			sudo apt-get upgrade -y;
+			break;;
+		[Nn]* ) break;;
+		* ) echo "Please answer yes or no/";;
+		esac
+	done
+	echo "Done...."
+	echo "---------------------------------------------"	
+	echo "-------------------------------------"
 
-sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon sysstat;
+while true; do
+		read -p "Install xbmc, apache server, and system tools? " yn
+		case $yn in
+		[Yy]* ) 
+			sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon sysstat;
+			break;;
+		[Nn]* ) break;;
+		* ) echo "Please answer yes or no/";;
+		esac
+	done
+
+while true; do
+		read -p "Install scipy, pandas, and python inotebook? " yn
+		case $yn in
+		[Yy]* ) 
+			sudo apt-get install -y python-pandas python-scipy ipython-notebook;
+			break;;
+		[Nn]* ) break;;
+		* ) echo "Please answer yes or no/";;
+		esac
+	done
 
 
 #Adding xbmc config
@@ -37,8 +85,6 @@ while true; do
 	read -p "Do you want to configure xbmc - if so then launch it and hit y" yn
 	case $yn in
 	[Yy]* ) 
-
-
 cp advancedsettings.xml /home/tolly/.xbmc/userdata/;
 break;;
 	[Nn]* ) break;;
@@ -50,6 +96,11 @@ done
 #Adding Aliases
 alias lss="ls -hal"
 alias bk="cd .."
+alias gits="git status"
+alias gitc="git commit -m"
+alias gita="git add *"
+alias gitpom="git push origin master"
+
 # Installing webmin on sever
 
 while true; do
