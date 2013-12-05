@@ -77,6 +77,18 @@ while true; do
 		esac
 	done
 
+while true; do
+		read -p "configure ipython-notebook server? " yn
+		case $yn in
+		[Yy]* ) 
+			ipython profile create nbserver;
+			sudo echo 'c.NotebookApp.ip="*"' >> ~/.config/ipython/profile_nbserver/ipython_notebook_config.py;
+			sudo echo 'c.NotebookApp.open_browser=False' >> ~/.config/ipython/profile_nbserver/ipython_notebook_config.py;
+			break;;
+		[Nn]* ) break;;
+		* ) echo "Please answer yes or no/";;
+		esac
+	done
 
 #Adding xbmc config
 #modify eventually so the user can enter the username, or take it from somewhere else
