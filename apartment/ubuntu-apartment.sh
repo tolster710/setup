@@ -21,7 +21,7 @@ while true; do
 	case $yn in
 	[Yy]* ) 
 
-	sudo echo -e "//192.168.2.45/Media /home/tolly/Drobo	cifs	username=Admin,password=Pass@word1,uid=tolly,gid=tolly,dir_mode=0774,file_mode=0774	0	0" >> /etc/fstab;
+	sudo echo -e "//192.168.2.45/Media /home/tolly/Drobo	cifs	username=Admin,password=Pass@word1,uid=tolly,gid=tolly,dir_mode=0774,file_mode=0774	0	0" | sudo tee -a /etc/fstab;
 	sudo echo -e "#Above is the primary mount for Drobo and the default credentials    ">> /etc/fstab;
 	mkdir /home/tolly/Drobo;
 	sudo mount -a;
