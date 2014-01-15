@@ -87,15 +87,13 @@ sed 's/\-//g'  |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g'
-`;
+`
+;
 mv -n $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
-done
-
-
+done;
 #Moves the files to the proper directory under TVShows
-
 #Producton 11/26
-testnames=('[Pp]arks' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
+testnames=('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
 rootDir=$(pwd)
 MovieDir=/home/tolly/Drobo/TV\ Shows
 for ((i=0; i<${#testnames[@]};i++)); 
