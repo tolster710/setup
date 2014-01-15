@@ -1,4 +1,4 @@
-
+#!/bin/bash
 #Updated 26Nov13
 #Git script to cleanup trenort directory
 #To do - end--> run move script to put folders to directory under TV shows --> log it and deliver to email
@@ -9,6 +9,7 @@ AGIT_DIR=$(pwd);
 cd $trenort
 IFS='
 '
+testnames=('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
 
 #do below loop to strip out the [] from the names and the first part
 
@@ -86,14 +87,13 @@ sed 's/264//g' |
 sed 's/\-//g'  |
 sed 's/\.\./\./g' |
 sed 's/\.\./\./g' |
-sed 's/\.\./\./g'
-`
-;
+sed 's/\.\./\./g' `;
 mv -n $f $t && echo "moved $f -> $t" >> /home/tolly/Drobo/Trenort/shorten.log;
-done;
+done
+echo "finished the move section";
 #Moves the files to the proper directory under TVShows
 #Producton 11/26
-testnames=('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
+#export testnames= ('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking');
 rootDir=$(pwd)
 MovieDir=/home/tolly/Drobo/TV\ Shows
 for ((i=0; i<${#testnames[@]};i++)); 
@@ -121,7 +121,7 @@ done
 
 #launches the python script from its location under /home/tolly/Documents/apt_scripts
 
-python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'AASDFASDF' '/tmp/Trenort_moved.txt'
+python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'B29b8e1dea' '/tmp/Trenort_moved.txt'
 
 rm /tmp/Trenort_moved.txt;
 #remove the temporary file
