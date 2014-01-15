@@ -121,7 +121,7 @@ done
 
 #launches the python script from its location under /home/tolly/Documents/apt_scripts
 
-python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'B29b8e1dea' '/tmp/Trenort_moved.txt'
+python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'ea' '/tmp/Trenort_moved.txt'
 
 rm /tmp/Trenort_moved.txt;
 #remove the temporary file
