@@ -1,0 +1,53 @@
+
+
+
+#Datacoind build instructions (LINUX)
+
+
+sudo apt-get update ; sudo apt-get install -y build-essential m4 libssl-dev libdb++-dev libboost-all-dev libminiupnpc-dev zip
+
+Configure GMP
+
+wget http://mirrors.kernel.org/gnu/gmp/gmp-5.1.2.tar.bz2;
+
+tar xjvf gmp-5.1.2.tar.bz2;cd gmp-5.1.2;
+
+./configure --enable-cxx;
+
+make
+sudo make install
+
+
+#Download and compile datacoind
+
+
+wget https://github.com/foo1inge/datacoin-hp/archive/master.zip ;
+
+unzip ./master.zip;cd datacoin-hp-master/src ;
+
+cp makefile.unix makefile.my;
+
+sed -i -e 's/$(OPENSSL_INCLUDE_PATH))/$(OPENSSL_INCLUDE_PATH) \/usr\/local\/include)/' makefile.my;
+
+sed -i -e 's/$(OPENSSL_LIB_PATH))/$(OPENSSL_LIB_PATH) \/usr\/local\/lib)/' makefile.my ;
+
+sed -i -e 's/$(LDHARDENING) $(LDFLAGS)/$(LDHARDENING) -Wl,-rpath,\/usr\/local\/lib $(LDFLAGS)/' makefile.my;
+
+make -f makefile.my
+sudo cp -f datacoind /usr/local/bin/
+
+
+#Setup datacoin:
+
+
+cd ~;
+
+mkdir -p .datacoin;
+
+echo 'server=1
+gen=1
+rpcallowip=127.0.0.1
+rpcuser=primecoinrpc
+rpcpassword=f1239a0069m
+sievesize=1000000' > .datacoin/datacoin.conf
+watch 'datacoind getinfo && datacoind listtransactions | grep -c immature'

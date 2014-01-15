@@ -42,7 +42,9 @@ def noticeEMail(starttime, usr, psw, fromaddr, toaddr, files):
     m="Date: %s\r\nFrom: %s\r\nTo: %s\r\nSubject: %s\r\nX-Mailer: My-Mail\r\n\r\n" % (senddate, fromaddr, toaddr, subject)
     msg='''
     
-    New Files: '''+str(files)
+    New Files: '''
+    for i in files:
+    	msg+="\r\n "+i
     
     server.sendmail(fromaddr, toaddr, m+msg)
     print "message sent"
@@ -63,9 +65,6 @@ if __name__ == '__main__':
     files=read_changed(filename)
     # Some long job...we'll count to 100,000,000
     count=0
-    for i in xrange(100000000):
-        count+=1
-        
     # Fill these in with the appropriate info...
     #urs='johnftolly@gmail.com'
     #psw=''

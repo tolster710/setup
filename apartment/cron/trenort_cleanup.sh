@@ -4,7 +4,7 @@
 #To do - end--> run move script to put folders to directory under TV shows --> log it and deliver to email
 #To do remove more file junk
 #To do --> transcode
-trenort=/home/tolly/Drobo/Trenort/trenort
+export trenort=/home/tolly/Drobo/Trenort/trenort
 AGIT_DIR=$(pwd);
 cd $trenort
 IFS='
@@ -48,7 +48,7 @@ done
 
 #strips suffix of filename
 #rootDir=$(pwd);
-for f in `find $rootDir -maxdepth 1 -name "*.*"`;
+for f in `find $trenort -maxdepth 1 -name "*.*"`;
 do t=`echo $f | 
 sed 's/[Hh][Dd][tT][Vv].//g' | 
 sed 's/[hHxX]264//g' |
@@ -78,7 +78,7 @@ sed 's/[xX]viDAFG//g' |
  sed 's/DHD//g' |  
  sed 's/[Ff][oO][vV]//g' |
 sed 's/killers//g' |
-sed 's/480p//g' | 
+sed 's/480[Pp]//g' | 
 sed 's/[Xx][Vv][Ii][dD]//g' |
 sed 's/[m2][hsH][Dd]//g' |
 sed 's/xvidfqm//g' |
@@ -100,7 +100,7 @@ rootDir=$(pwd)
 MovieDir=/home/tolly/Drobo/TV\ Shows
 for ((i=0; i<${#testnames[@]};i++)); 
 do  
-for f in `find $rootDir -name "*${testnames[$i]}*"`;
+for f in `find $trenort -name "*${testnames[$i]}*"`;
 do 
 #echo "$i, $f";
 base_dir=$(find $MovieDir -maxdepth 1 -type d -name "*${testnames[$i]}*");
@@ -123,7 +123,7 @@ done
 
 #launches the python script from its location under /home/tolly/Documents/apt_scripts
 
-python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'AASDFASDF' '/home/tolly/Documents/apt_scripts'
+python /home/tolly/Documents/apt_scripts/py_emailNew.py 'johnftolly@gmail.com' 'AASDFASDF' '/tmp/Trenort_moved.txt'
 
 rm /tmp/Trenort_moved.txt;
 #remove the temporary file
