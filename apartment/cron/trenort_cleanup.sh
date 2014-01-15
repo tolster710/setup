@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #Updated 26Nov13
 #Git script to cleanup trenort directory
 #To do - end--> run move script to put folders to directory under TV shows --> log it and deliver to email
@@ -9,7 +9,7 @@ AGIT_DIR=$(pwd);
 cd $trenort
 IFS='
 '
-testnames=('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Ss]impsons' '[wW]alking')
+testnames=('[Pp]arks' '[sS]herlock' '[pP]eele' '[Ii]nterest' '[nN]ewsroom' '[Mm]etaloc' '[Uu]ndercover' '[vV]eep'  'American' '[fF]amily' '[cC]ommunity' '[bB]roke' '[uU]gly' 'Portlandia' '[Aa]rcher' 'QI' '[Pp]lanet' '[Cc]aliforn' '[sS]uits' '[Pp]sych' '[Mm]other' '[cC]omic' '[hH]orizon' ' [tT]osh' '[sS]torage' '[Hh]unger' '[Bb]oardwalk' '[Bb]reaking' '[Dd]ownton' '[Hh]omeland' '[Nn][Oo][vV][aA]' '[aA]narchy' '[sS]outh' '[lL]eague' '[Mm]indy' '[Rr]evolution' '[Ss]impsons' '[wW]alking', 'Dad')
 
 #do below loop to strip out the [] from the names and the first part
 
