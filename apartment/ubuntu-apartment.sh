@@ -59,7 +59,7 @@ while true; do
 		read -p "Install xbmc, apache server, and system tools? " yn
 		case $yn in
 		[Yy]* ) 
-			sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon sysstat;
+			sudo apt-get install -y xbmc sysstat iotop ssh gparted curl python g++ make apt-show-versions apache2 bmon sysstat gnome-system-tools;
 			break;;
 		[Nn]* ) break;;
 		* ) echo "Please answer yes or no/";;
